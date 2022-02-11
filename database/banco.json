@@ -1,0 +1,65 @@
+{
+  "pizzas": [
+    {
+      "nome": "Margherita",
+      "preco": "R$ 20,00",
+      "imagem": "https://www.pizzahut.com.br/static/images/pizzas/margherita.png",
+      "descricao": "maravilhosa pizza de tomate, manjericão e queijo",
+      "ingredientes": [
+        "queijo",
+        "tomate",
+        "manjericão",
+        "farinha de trigo",
+        "azeitona"
+      ],
+      "tamanho": "34km"
+    },
+    {
+      "nome": "Calabresa",
+      "preco": "R$ 20,00",
+      "imagem": "https://www.pizzahut.com.br/static/images/pizzas/margherita.png",
+      "descricao": "maravilhosa pizza calabresa com cebola",
+      "ingredientes": [
+        "queijo",
+        "calabresa",
+        "tomate",
+        "manjericão",
+        "farinha de trigo",
+        "azeitona"
+      ],
+      "tamanho": "34km"
+    }
+  ],
+  "usuarios": [
+    {
+      "nome": "José",
+      "email": "jose@exemplo.com",
+      "senha": "123456",
+      "eh_admin": true
+    },
+    {
+      "nome": "Astrogildo",
+      "email": "astro@gildo.com",
+      "senha": "124578",
+      "eh_admin": false
+    },
+    {
+      "nome": "Joana",
+      "email": "joana@darc.fr",
+      "senha": "987654",
+      "eh_admin": false
+    },
+    {
+      "nome": "Napoleao",
+      "email": "napoleao@perdedor.com",
+      "senha": "1800",
+      "eh_admin": false
+    },
+    {
+      "nome": "Leonardo",
+      "email": "lcarvalho@digitalhouse.com",
+      "senha": "abcdef",
+      "eh_admin": false
+    }
+  ]
+}
