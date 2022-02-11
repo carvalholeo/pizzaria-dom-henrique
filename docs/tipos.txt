@@ -1,0 +1,23 @@
+TIPOS DE NÚMEROS
+INT = -2.147.483.648 até 21.478.364 // 0 até 4.294.967.295
+BIGINT = -9223372036854775808 A 9223372036854775807 // 0 A 18.446.744.073.709.551.615
+MEDIUMINT = -8388608 A 8388607 // 0 A 16777215
+SMALLINT = -32768 A 32767 // 0 A 65535
+TINYINT = -128 A 127 // 0 A 255
+
+FLOAT = números flutuantes
+DECIMAL = números flutuantes com escala de precisão
+
+TIPO BOOLEANO
+TINYINT = 0 ou 1
+
+
+TIPOS DE STRINGS
+CHAR(100) = String com um número exato de caracteres
+VARCHAR(11) = String com limite de caracteres
+TEXT = Textão
+
+TIPOS DE DATA
+DATE = datas (aaaa-mm-dd)
+TIME = horas (hh:mm:ss)
+DATETIME = hora e data (aaaa-mm-dd hh:mm:ss)
