@@ -1,8 +1,10 @@
 const express = require('express');
 
+const usuarioEstaLogado = require('../middlewares/usuarioEstaLogado');
+
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', usuarioEstaLogado, (req, res) => {
   res.render('index')
 });
 
