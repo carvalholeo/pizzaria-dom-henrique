@@ -34,7 +34,7 @@
     {
       "nome": "José",
       "email": "jose@exemplo.com",
-      "senha": "123456",
+      "senha": "$2b$10$3IuNrHgQ4Xxm0wTRMexpyennaXI7yC9UZ6BxXSuPdcO1u.Xe/AqyG",
       "eh_admin": true
     },
     {
