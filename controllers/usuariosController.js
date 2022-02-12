@@ -28,6 +28,28 @@ const usuariosController = {
   },
   exibeFormularioCadastro: (req, res) => {
     res.render('cadastrar');
+  },
+  exibeFormularioLogin: (req, res) => {
+    res.render('login');
+  },
+  fazerLogin: (req, res) => {
+    const arquivo = fs.readFileSync(path.join(__dirname, '..', 'database', 'banco.json'), {
+      encoding: 'utf-8'
+    });
+    const objeto = JSON.parse(arquivo)
+    const meuUsuario = objeto.usuarios.find(usuario => usuario.email === req.body.usuario)
+
+    if (!meuUsuario) {
+      return res.send('Usuário ou senha inválidos');
+    }
+
+    const senhaEstaCorreta = bcrypt.compareSync(req.body.senha, meuUsuario.senha)
+
+    if (!senhaEstaCorreta) {
+      return res.send('Usuário ou senha inválidos');
+    }
+
+    res.send(meuUsuario)
   }
 };
 
