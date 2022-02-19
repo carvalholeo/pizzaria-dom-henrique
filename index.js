@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
@@ -12,8 +14,10 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+console.log(process.env)
+
 app.use(session({
-  secret: 'SENHA DE INVASÃO DA UCRÂNIA',
+  secret: process.env.BOLO,
   resave: false,
   saveUninitialized: false,
   cookie: {
