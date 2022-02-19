@@ -3,7 +3,7 @@
     {
       "nome": "Margherita",
       "preco": "R$ 20,00",
-      "imagem": "https://www.pizzahut.com.br/static/images/pizzas/margherita.png",
+      "imagem": "4cad572ea43d76e7-estação-hack.png",
       "descricao": "maravilhosa pizza de tomate, manjericão e queijo",
       "ingredientes": [
         "queijo",
@@ -17,7 +17,7 @@
     {
       "nome": "Calabresa",
       "preco": "R$ 20,00",
-      "imagem": "https://www.pizzahut.com.br/static/images/pizzas/margherita.png",
+      "imagem": "4cad572ea43d76e7-estação-hack.png",
       "descricao": "maravilhosa pizza calabresa com cebola",
       "ingredientes": [
         "queijo",
@@ -28,6 +28,19 @@
         "azeitona"
       ],
       "tamanho": "34km"
+    },
+    {
+      "nome": "Joana",
+      "preco": "50",
+      "imagem": "4cad572ea43d76e7-estação-hack.png",
+      "ingredientes": [
+        "queijo",
+        "calabresa",
+        "tomate",
+        "manjericão",
+        "farinha de trigo",
+        "azeitona"
+      ]
     }
   ],
   "usuarios": [
