@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
+const methodOverride = require('method-override');
 
 const baseRoutes = require('./routes/index');
 const pizzasRoutes = require('./routes/pizzas');
@@ -24,6 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'))
 
 app.use(baseRoutes);
 app.use('/pizzas', pizzasRoutes);

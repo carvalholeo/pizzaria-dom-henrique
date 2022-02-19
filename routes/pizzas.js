@@ -12,5 +12,8 @@ router.use(usuarioEhAdmin);
 router.get('/cadastrar', pizzasController.exibeFormulario);
 router.post('/cadastrar', uploadFotos, pizzasController.cadastraPizza);
 router.get('/lista', pizzasController.exibeListaPizzas);
+router.delete('/:id', pizzasController.apagarPizza);
+router.get('/:id', pizzasController.exibePizzaEdicao);
+router.patch('/:id', uploadFotos, pizzasController.salvaPizzaEditada);
 
 module.exports = router;

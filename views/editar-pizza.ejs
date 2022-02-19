@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar pizza</title>
+</head>
+<body>
+  <main>
+    <form action="/pizzas/<%= pizza.id%>?_method=PATCH" method="post" enctype="multipart/form-data">
+      <label for="pizza">Pizza</label>
+      <input type="text" name="nome" id="pizza" value="<%= pizza.nome %> ">
+
+      <label for="preco">Preço</label>
+      <input type="text" name="preco" id="preco" value="<%= pizza.preco %> ">
+
+      <label for="imagem">Imagem</label>
+      <img src="/images/<%= pizza.imagem %>">
+      <input type="file" name="foto" id="imagem">
+
+      <button type="submit">Atualizar</button>
+    </form>
+  </main>
+</body>
+</html>

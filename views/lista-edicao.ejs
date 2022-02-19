@@ -23,7 +23,7 @@
           <% }) %>
         </ul>
         <a href="/pizzas/<%= pizza.id %>">Editar pizza</a>
-        <form action="/pizzas/<%= pizza.id %>" method="post">
+        <form action="/pizzas/<%= pizza.id %>?_method=DELETE" method="post">
           <button type="submit">Apagar pizza</button>
         </form>
       <% }) %>
