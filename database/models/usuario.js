@@ -32,20 +32,28 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false,
       allowNull: false,
     },
-    data_criacao: {
-      type: DataTypes.DATE,
-      defaultValue: new Date(),
-    },
-    data_atualizacao:  {
-      type: DataTypes.DATE,
-      defaultValue: new Date(),
-    }
+    // data_criacao: {
+    //   type: DataTypes.DATE,
+    //   defaultValue: new Date(),
+    // },
+    // data_atualizacao:  {
+    //   type: DataTypes.DATE,
+    //   defaultValue: new Date(),
+    // },
+    // destroyTime:  {
+    //   type: DataTypes.DATE,
+    //   defaultValue: new Date(),
+    // }
   }, {
     sequelize,
     modelName: 'Usuario',
     freezeTableName: true,
     tableName: 'usuarios',
-    timestamps: false
+    timestamps: true,
+    paranoid: true,
+    deletedAt: 'destroyTime',
+    updatedAt: 'data_atualizacao',
+    createdAt: 'data_criacao',
   });
   return Usuario;
 };
