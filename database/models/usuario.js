@@ -10,7 +10,26 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Usuario.hasMany(models.Pizza, {
+        as: 'usuario_pizza',
+        foreignKey: 'usuarios_id',
+        onDelete: 'RESTRICT',
+        onUpdate: 'NO ACTION',
+      });
+
+      Usuario.hasMany(models.Telefone, {
+        as: 'usuario_telefones',
+        foreignKey: 'usuarios_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'NO ACTION'
+      });
+
+      Usuario.hasMany(models.Endereco, {
+        as: 'usuario_enderecos',
+        foreignKey: 'usuarios_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'NO ACTION'
+      });
     }
   }
   Usuario.init({

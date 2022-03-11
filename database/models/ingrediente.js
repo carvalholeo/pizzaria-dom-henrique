@@ -14,12 +14,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Ingrediente.init({
-    nome: DataTypes.STRING(50)
+    nome: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      unique: true
+    }
   }, {
     sequelize,
     modelName: 'Ingrediente',
     tableName: 'ingredientes',
-    freezeTableName: true
+    freezeTableName: true,
+    createdAt: 'data_criacao',
+    updatedAt: 'data_atualizacao'
   });
   return Ingrediente;
 };

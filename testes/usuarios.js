@@ -59,5 +59,7 @@ const Op = Sequelize.Op;
 // })
 //   .then(console.log)
 
-Usuario.findAll()
+Usuario.findAll({
+  include: 'usuario_pizza'
+})
   .then(console.log)
