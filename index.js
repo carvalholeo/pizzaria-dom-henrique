@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 
 const path = require('path');
 const express = require('express');
@@ -11,13 +11,13 @@ const usuariosRoutes = require('./routes/usuarios');
 
 const app = express();
 
+const PORT = process.env.PORT || 5000;
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-console.log(process.env)
-
 app.use(session({
-  secret: process.env.BOLO,
+  secret: process.env.SENHA_SESSION,
   resave: false,
   saveUninitialized: false,
   cookie: {
@@ -35,4 +35,4 @@ app.use(baseRoutes);
 app.use('/pizzas', pizzasRoutes);
 app.use('/usuarios', usuariosRoutes);
 
-app.listen(5000, () => console.log('Servidor em execução'));
+app.listen(PORT, () => console.log('Servidor em execução'));
