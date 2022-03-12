@@ -2,54 +2,52 @@ const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcrypt');
 
+const { Usuario } = require('../database/models');
+
+const saltRounds = 10;
+
 const usuariosController = {
-  cadastrar: (req, res) => {
-    const saltRounds = 10;
-    const arquivo = fs.readFileSync(path.join(__dirname, '..', 'database', 'banco.json'), {
-      encoding: 'utf-8'
-    });
-    const objeto = JSON.parse(arquivo)
+  cadastrar: async (req, res) => {
+    const { nome, data_nascimento, email, cpf, senha } = req.body;
 
-    const hash = bcrypt.hashSync(req.body.senha, saltRounds);
-
-    const novoUsuario = {
-      nome: req.body.nome,
-      email: req.body.email,
+    const hash = bcrypt.hashSync(senha, saltRounds);
+    
+    const novoUsuario = await Usuario.create({
+      nome,
+      data_nascimento,
+      email,
+      cpf,
       senha: hash,
-      eh_admin: false
-    }
-    objeto.usuarios.push(novoUsuario);
-    const objetoEmString = JSON.stringify(objeto);
+    });
 
-    fs.writeFileSync(path.join(__dirname, '..', 'database', 'banco.json'), objetoEmString);
-
-    console.log(req.body)
-    res.send(objeto.usuarios)
+    res.send(novoUsuario);
   },
+  
   exibeFormularioCadastro: (req, res) => {
     res.render('cadastrar');
   },
+  
   exibeFormularioLogin: (req, res) => {
     res.render('login');
   },
-  fazerLogin: (req, res) => {
-    const arquivo = fs.readFileSync(path.join(__dirname, '..', 'database', 'banco.json'), {
-      encoding: 'utf-8'
-    });
-    const objeto = JSON.parse(arquivo)
-    const meuUsuario = objeto.usuarios.find(usuario => usuario.email === req.body.usuario)
+  
+  fazerLogin: async (req, res) => {
+    const { usuario, senha } = req.body;
+
+    const meuUsuario = await Usuario.findOne({ where: { email: usuario } });
 
     if (!meuUsuario) {
       return res.send('Usuário ou senha inválidos');
     }
 
-    const senhaEstaCorreta = bcrypt.compareSync(req.body.senha, meuUsuario.senha)
+    const senhaEstaCorreta = bcrypt.compareSync(senha, meuUsuario.senha)
 
     if (!senhaEstaCorreta) {
       return res.send('Usuário ou senha inválidos');
     }
 
     delete meuUsuario.senha;
+    
     req.session.usuario = meuUsuario;
 
     res.redirect('/');

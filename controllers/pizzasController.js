@@ -1,81 +1,76 @@
 const fs = require('fs');
 const path = require('path');
 
+const { Pizza } = require('../database/models');
 
 const pizzasController = {
   exibeFormulario: (req, res) => {
     res.render('formulario-pizzas');
   },
-  cadastraPizza: (req, res) => {
-    const arquivo = fs.readFileSync(path.join(__dirname, '..', 'database', 'banco.json'), {
-      encoding: 'utf-8'
+  
+  cadastraPizza: async (req, res) => {
+    const { nome, preco } = req.body;
+    const imagem = req.file.filename;
+
+    const usuario = req.session.usuario;
+
+    await Pizza.create({
+      nome,
+      preco,
+      imagem,
+      tamanho: '8 Pedaços',
+      usuarios_id: usuario.id,  
     });
-    const objeto = JSON.parse(arquivo)
-
-    const novaPizza = {
-      nome: req.body.nome,
-      preco: req.body.preco,
-      imagem: req.file.filename
-    }
-
-    objeto.pizzas.push(novaPizza);
-    const objetoEmString = JSON.stringify(objeto);
-    fs.writeFileSync(path.join(__dirname, '..', 'database', 'banco.json'), objetoEmString);
 
     res.redirect('/pizzas/lista');
   },
-  exibeListaPizzas: (req, res) => {
-    const arquivo = fs.readFileSync(path.join(__dirname, '..', 'database', 'banco.json'), {
-      encoding: 'utf-8'
-    });
-    const objeto = JSON.parse(arquivo)
-    const meuLanchinho = objeto.pizzas;
+  
+  exibeListaPizzas: async (req, res) => {
+    const pizzas = await Pizza.findAll({ include: 'pizza_usuario' });
 
-    res.render('lista-edicao', {pizzas: meuLanchinho});
+    res.render('lista-edicao', { pizzas });
   },
-  apagarPizza: (req, res) => {
-    const {id} = req.params;
-    const arquivo = fs.readFileSync(path.join(__dirname, '..', 'database', 'banco.json'), {
-      encoding: 'utf-8'
-    });
-    const objeto = JSON.parse(arquivo);
-    const pizzasNaoApagadas = objeto.pizzas.filter(pizza => pizza.id !== Number(id));
+  
+  apagarPizza: async (req, res) => {
+    const { id } = req.params;
 
-    objeto.pizzas = pizzasNaoApagadas;
-    const objetoEmString = JSON.stringify(objeto);
-    fs.writeFileSync(path.join(__dirname, '..', 'database', 'banco.json'), objetoEmString);
+    await Pizza.destroy({ where: { id } });
 
     res.redirect('/pizzas/lista');
   },
-  exibePizzaEdicao: (req, res) => {
-    const {id} = req.params;
-    const arquivo = fs.readFileSync(path.join(__dirname, '..', 'database', 'banco.json'), {
-      encoding: 'utf-8'
-    });
-    const objeto = JSON.parse(arquivo);
+  
+  exibePizzaEdicao: async (req, res) => {
+    const { id } = req.params;
 
-    const pizza = objeto.pizzas.find(pizza => pizza.id === Number(id));
+    const pizza = await Pizza.findOne({ where: { id } });
 
-    res.render('editar-pizza', {pizza: pizza});
+    res.render('editar-pizza', { pizza });
   },
-  salvaPizzaEditada: (req, res) => {
-    const {id} = req.params;
-    const arquivo = fs.readFileSync(path.join(__dirname, '..', 'database', 'banco.json'), {
-      encoding: 'utf-8'
-    });
-    const objeto = JSON.parse(arquivo);
+  
+  salvaPizzaEditada: async (req, res) => {
+    const { id } = req.params;
+    const { nome, preco } = req.body;
+    const imagem = req.file.filename;
 
-    const posicao = objeto.pizzas.findIndex(pizza => pizza.id === Number(id));
+    const usuario = req.session.usuario;
 
-    objeto.pizzas[posicao] = {
-      ...objeto.pizzas[posicao],
-      nome: req.body.nome,
-      preco: req.body.preco,
-      imagem: req.file.filename
-    }
+    const pizza = await Pizza.findOne({ where: { id } });
 
-    const objetoEmString = JSON.stringify(objeto);
-    fs.writeFileSync(path.join(__dirname, '..', 'database', 'banco.json'), objetoEmString);
+    if(pizza.usuarios_id !== usuario.id)
+      res.send('Você não tem permissão para editar essa pizza');
+
+    pizza.nome = nome;
+    pizza.preco = preco;
+    pizza.imagem = imagem;
+
+    await pizza.save();
+
+    // await Pizza.update({
+    //   nome,
+    //   preco,
+    //   imagem,
+    //   usuarios_id: usuario.id,
+    // }, { where: { id }});
 
     res.redirect('/pizzas/lista')
   }

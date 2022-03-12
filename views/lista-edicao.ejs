@@ -13,15 +13,11 @@
     <h1>Lista de pizzas para editar</h1>
     <ul>
       <% pizzas.forEach(pizza => { %>
+        <br>
         <li><%= pizza.nome %> / R$ <%= pizza.preco %></li>
         <p>Descrição: <%= pizza.descricao %></p>
-        <img src="/images/<%= pizza.imagem %>" alt="Foto de uma pizza de <%= pizza.nome %>">
-        <p>Ingredientes</p>
-        <ul>
-          <% pizza.ingredientes.forEach(ingrediente => { %>
-            <li><%= ingrediente %> </li>
-          <% }) %>
-        </ul>
+        <img width="300px" src="/images/<%= pizza.imagem %>" alt="Foto de uma pizza de <%= pizza.nome %>">
+        <p>Criado por: <%= pizza.pizza_usuario.nome %></p>
         <a href="/pizzas/<%= pizza.id %>">Editar pizza</a>
         <form action="/pizzas/<%= pizza.id %>?_method=DELETE" method="post">
           <button type="submit">Apagar pizza</button>
