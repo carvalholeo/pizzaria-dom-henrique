@@ -50,19 +50,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
       allowNull: false,
-    },
-    // data_criacao: {
-    //   type: DataTypes.DATE,
-    //   defaultValue: new Date(),
-    // },
-    // data_atualizacao:  {
-    //   type: DataTypes.DATE,
-    //   defaultValue: new Date(),
-    // },
-    // destroyTime:  {
-    //   type: DataTypes.DATE,
-    //   defaultValue: new Date(),
-    // }
+    }
   }, {
     sequelize,
     modelName: 'Usuario',

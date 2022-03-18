@@ -16,6 +16,12 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'RESTRICT',
         onUpdate: 'NO ACTION'
       });
+
+      Pizza.belongsToMany(models.Ingrediente, {
+        through: 'PizzaIngrediente',
+        as: 'pizza_ingrediente',
+        foreignKey: 'pizzas_id'
+      })
     }
   }
   Pizza.init({
@@ -40,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     usuarios_id: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
     }
   }, {
     sequelize,

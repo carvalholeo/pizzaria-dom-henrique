@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Pizzas', {
+    await queryInterface.createTable('pizzas', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -9,34 +9,43 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       nome: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(100),
+        allowNull: false,
+        unique: true
       },
       descricao: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       preco: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL,
+        allowNull: false
       },
       tamanho: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(45),
+        allowNull: false,
       },
       imagem: {
         type: Sequelize.STRING
       },
-      usuario_id: {
-        type: Sequelize.INTEGER
+      usuarios_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'usuarios',
+          key: 'id'
+        }
       },
-      createdAt: {
+      data_criacao: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      data_atualizacao: {
         allowNull: false,
         type: Sequelize.DATE
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Pizzas');
+    await queryInterface.dropTable('pizzas');
   }
 };

@@ -47,7 +47,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(2),
       allowNull: false
     },
-    ponto_refencia: DataTypes.STRING,
+    ponto_referencia: DataTypes.STRING,
     usuarios_id: {
       type: DataTypes.INTEGER,
       allowNull: false

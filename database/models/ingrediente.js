@@ -11,6 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Ingrediente.belongsToMany(models.Pizza, {
+        through: 'PizzaIngrediente',
+        as: 'ingrediente_pizza',
+        foreignKey: 'ingredientes_id'
+      })
     }
   }
   Ingrediente.init({
@@ -23,9 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Ingrediente',
     tableName: 'ingredientes',
-    freezeTableName: true,
-    createdAt: 'data_criacao',
-    updatedAt: 'data_atualizacao'
+    freezeTableName: true
   });
   return Ingrediente;
 };
